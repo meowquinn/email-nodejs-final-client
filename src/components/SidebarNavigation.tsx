@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import {
     FileOutlined,
-    CalendarOutlined,
+    StarOutlined,
     SendOutlined,
     MailOutlined,
     LeftOutlined,
@@ -35,7 +35,7 @@ export default () => {
 
     const items: MenuItem[] = [
         getItem('Inbox', '1', <MailOutlined />),
-        getItem('Starred', '2', <CalendarOutlined />),
+        getItem('Starred', '2', <StarOutlined />),
         getItem('Sent', '3', <SendOutlined />),
         getItem('Drafts', '4', <FileOutlined />),
         { type: 'divider' },
