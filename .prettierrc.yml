@@ -1,0 +1,7 @@
+plugins:
+    - prettier-plugin-tailwindcss
+singleQuote: true
+tabWidth: 4
+trailingComma: none
+semi: false
+quoteProps: as-needed
