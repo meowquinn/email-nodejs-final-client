@@ -66,7 +66,6 @@ export default () => {
             <Menu
                 style={{ width: '100%', height: '100%' }}
                 defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
                 mode={'inline'}
                 theme={'light'}
                 items={items}
