@@ -1,24 +1,27 @@
-import Image from 'next/image'
-import { Layout, Space } from 'antd'
+import { ConfigProvider, Drawer, FloatButton, Form, Input, Layout } from 'antd'
 import SidebarNavigation from '@/components/SidebarNavigation'
+import SearchBar from '@/components/SearchBar'
+import EmailTable from '@/components/EmailTable'
+import { useState } from 'react'
+import { FormOutlined } from '@ant-design/icons'
+import ReactQuill from 'react-quill'
 
+const { TextArea } = Input
 const { Header, Footer, Sider, Content } = Layout
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
     color: '#fff',
     height: 64,
-    paddingInline: 50,
-    lineHeight: '64px',
-    backgroundColor: '#7dbcea'
+    paddingInline: 32,
+    background: '#fff'
 }
 
 const contentStyle: React.CSSProperties = {
     textAlign: 'center',
     minHeight: 120,
     lineHeight: '120px',
-    color: '#fff',
-    backgroundColor: '#108ee9'
+    color: '#fff'
 }
 
 const footerStyle: React.CSSProperties = {
@@ -28,14 +31,62 @@ const footerStyle: React.CSSProperties = {
 }
 
 export default function Home() {
+    const [open, setOpen] = useState(false)
+    const showDrawer = () => {
+        setOpen(true)
+    }
+    const onClose = () => {
+        setOpen(false)
+    }
+
     return (
-        <Layout>
-            <SidebarNavigation />
+        <ConfigProvider
+            theme={{
+                token: {
+                    colorPrimary: '#00b96b'
+                }
+            }}
+        >
             <Layout>
-                <Header style={headerStyle}>Header</Header>
-                <Content style={contentStyle}>Content</Content>
-                <Footer style={footerStyle}>Footer</Footer>
+                <SidebarNavigation />
+                <Layout>
+                    <Header style={headerStyle}>
+                        <SearchBar />
+                    </Header>
+                    <Content style={contentStyle}>
+                        <EmailTable />
+                    </Content>
+                </Layout>
+                <FloatButton
+                    icon={<FormOutlined />}
+                    type="primary"
+                    onClick={showDrawer}
+                    style={{ right: 64, bottom: 64 }}
+                />
+                <Drawer
+                    // responsive width
+                    width={640}
+                    placement="right"
+                    onClose={onClose}
+                    open={open}
+                >
+                    <Form layout="vertical" style={{ width: '100%' }}>
+                        <Form.Item label="Send to">
+                            <Input placeholder="input placeholder" />
+                        </Form.Item>
+                        <Form.Item label="CC">
+                            <Input placeholder="input placeholder" />
+                        </Form.Item>
+                        <Form.Item label="BCC">
+                            <Input placeholder="input placeholder" />
+                        </Form.Item>
+                        <Form.Item label="Content">
+                            {/* <ReactQuill /> */}
+                            <TextArea rows={4} showCount />
+                        </Form.Item>
+                    </Form>
+                </Drawer>
             </Layout>
-        </Layout>
+        </ConfigProvider>
     )
 }
