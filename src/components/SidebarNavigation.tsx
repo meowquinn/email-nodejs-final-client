@@ -5,6 +5,7 @@ import {
     SendOutlined,
     MailOutlined,
     LeftOutlined,
+    DeleteOutlined,
     RightOutlined,
     PlusOutlined,
     SettingOutlined
@@ -38,6 +39,7 @@ export default () => {
         getItem('Starred', '2', <StarOutlined />),
         getItem('Sent', '3', <SendOutlined />),
         getItem('Drafts', '4', <FileOutlined />),
+        getItem('Trash', '4', <DeleteOutlined />),
         { type: 'divider' },
         getItem('Manage labels', '5', <SettingOutlined />),
         getItem('Create new label', '6', <PlusOutlined />),
