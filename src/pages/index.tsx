@@ -1,13 +1,13 @@
-import { ConfigProvider, Drawer, FloatButton, Form, Input, Layout } from 'antd'
-import SidebarNavigation from '@/components/SidebarNavigation'
-import SearchBar from '@/components/SearchBar'
 import EmailTable from '@/components/EmailTable'
-import { useState } from 'react'
+import CustomLayout from '@/components/Layout'
+import SearchBar from '@/components/SearchBar'
+import SidebarNavigation from '@/components/SidebarNavigation'
 import { FormOutlined } from '@ant-design/icons'
-import ReactQuill from 'react-quill'
-
+import { Drawer, FloatButton, Form, Input, Layout } from 'antd'
+import { NextPageContext } from 'next'
+import { useState } from 'react'
 const { TextArea } = Input
-const { Header, Footer, Sider, Content } = Layout
+const { Header, Content } = Layout
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -24,29 +24,19 @@ const contentStyle: React.CSSProperties = {
     color: '#fff'
 }
 
-const footerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: '#fff',
-    backgroundColor: '#7dbcea'
-}
+function Home({ account }: { account: object }) {
+    console.log(account)
 
-export default function Home() {
+    // const cookieValue = req.cookies.get('account') // <--- GET COOKIE
+    // console.log(cookieValue)
+
+    // get cookie
     const [open, setOpen] = useState(false)
-    const showDrawer = () => {
-        setOpen(true)
-    }
-    const onClose = () => {
-        setOpen(false)
-    }
+    const showDrawer = () => setOpen(true)
+    const onClose = () => setOpen(false)
 
     return (
-        <ConfigProvider
-            theme={{
-                token: {
-                    colorPrimary: '#00b96b'
-                }
-            }}
-        >
+        <CustomLayout>
             <Layout>
                 <SidebarNavigation />
                 <Layout>
@@ -87,6 +77,14 @@ export default function Home() {
                     </Form>
                 </Drawer>
             </Layout>
-        </ConfigProvider>
+        </CustomLayout>
     )
 }
+
+Home.getInitialProps = async ({ req }: NextPageContext) => {
+    const headers = req ? req.headers : {}
+    const account = JSON.parse((headers.account as string) || '{}')
+    return { account }
+}
+
+export default Home
