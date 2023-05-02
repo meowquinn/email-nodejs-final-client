@@ -59,7 +59,7 @@ export default () => {
             onBreakpoint={(broken) => {
                 setCollapse(broken)
             }}
-            collapsible={true}
+            collapsible
             onCollapse={(value) => setCollapse(value)}
             trigger={collapse ? <RightOutlined /> : <LeftOutlined />}
         >
