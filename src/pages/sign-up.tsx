@@ -11,14 +11,14 @@ export default () => {
 
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values)
-        axios
-            .post('http://localhost:3300/auth', values)
-            .then((res) => {
-                if (res.status === 201) router.push('/')
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        // axios
+        //     .post('http://localhost:3300/auth', values)
+        //     .then((res) => {
+        //         if (res.status === 201) router.push('/')
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     })
     }
     
     return (

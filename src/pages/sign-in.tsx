@@ -5,22 +5,23 @@ import { PhoneOutlined } from '@ant-design/icons'
 import CustomLayout from '@/components/Layout'
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
+import { setCookie } from 'cookies-next'
 
 export default () => {
     const router = useRouter()
 
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values)
-        axios
-            .post('http://localhost:3300/auth/sign-in', values, {
-                withCredentials: true
-            })
-            .then((res) => {
-                if (res.status === 200) router.push('/')
-            })
-            .catch((err) => {
-                console.log(err.response.data)
-            })
+        // axios
+        //     .post('http://localhost:3300/auth/sign-in', values, {
+        //         withCredentials: true
+        //     })
+        //     .then((res) => {
+        //         if (res.status === 200) router.push('/')
+        //     })
+        //     .catch((err) => {
+        //         console.log(err.response.data)
+        //     })
     }
 
     return (
@@ -36,8 +37,6 @@ export default () => {
                 <Col lg={6} md={10} sm={16} xs={24}>
                     <Form
                         name="login"
-                        method="POST"
-                        action="/api/sign-in"
                         onFinish={onFinish}
                         initialValues={{ remember: true }}
                     >

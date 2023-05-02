@@ -4,13 +4,12 @@ import CustomLayout from '@/components/Layout'
 import SearchBar from '@/components/SearchBar'
 import SidebarNavigation from '@/components/SidebarNavigation'
 import { FormOutlined } from '@ant-design/icons'
-import { Drawer, FloatButton, Form, Input, Layout } from 'antd'
+import { FloatButton, Input, Layout } from 'antd'
+import { getCookie } from 'cookies-next'
 import { NextPageContext } from 'next'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 const { TextArea } = Input
 const { Header, Content } = Layout
-import type { DraggableData, DraggableEvent } from 'react-draggable'
-import Draggable from 'react-draggable'
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -27,8 +26,7 @@ const contentStyle: React.CSSProperties = {
     color: '#fff'
 }
 
-function Home({ account }: { account: object }) {
-    console.log(account)
+export default function Home() {
     const [open, setOpen] = useState(false)
 
     const handleOk = (e: React.MouseEvent<HTMLElement>) => {
@@ -61,8 +59,9 @@ function Home({ account }: { account: object }) {
                     description="Compose"
                     icon={<FormOutlined />}
                     type="primary"
+                    shape="circle"
                     onClick={showCompose}
-                    style={{ right: 60, bottom: 60, width: 70, height: 70 }}
+                    style={{ right: 64, bottom: 64, width: 96, height: 96 }}
                 />
                 <ComposeEmail
                     open={open}
@@ -97,10 +96,8 @@ function Home({ account }: { account: object }) {
     )
 }
 
-Home.getInitialProps = async ({ req }: NextPageContext) => {
-    const headers = req ? req.headers : {}
-    const account = JSON.parse((headers.account as string) || '{}')
-    return { account }
-}
-
-export default Home
+// Home.getInitialProps = async ({ req }: NextPageContext) => {
+//     const headers = req ? req.headers : {}
+//     const account = JSON.parse((headers.account as string) || '{}')
+//     return { account }
+// }
