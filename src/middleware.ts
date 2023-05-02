@@ -1,11 +1,22 @@
 import { NextResponse } from 'next/server'
 import { NextRequest } from 'next/server'
+import URLParse from 'url-parse'
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
+    const url = URLParse(request.url, true)
     const cookie = request.cookies.get('token')?.value
-    const response = NextResponse.next()
-    if (cookie) {
+
+    if (
+        (url.pathname === '/sign-in' ||
+            url.pathname === '/sign-up' ||
+            url.pathname === '/forgot-password' ||
+            url.pathname === '/reset-password') &&
+        cookie
+    )
+        return NextResponse.redirect(new URL('/', request.url))
+    else if (cookie) {
+        const response = NextResponse.next()
         await fetch('http://localhost:3300/auth', {
             headers: {
                 Authorization: `Bearer ${cookie}`
@@ -25,5 +36,5 @@ export async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-    matcher: '/'
+    matcher: '/:path*'
 }

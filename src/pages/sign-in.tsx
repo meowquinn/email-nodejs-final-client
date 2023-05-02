@@ -4,7 +4,6 @@ import { Button, Checkbox, Form, Input, Col, Row } from 'antd'
 import { PhoneOutlined } from '@ant-design/icons'
 import CustomLayout from '@/components/Layout'
 import { useRouter } from 'next/navigation'
-import { setCookie } from 'cookies-next'
 import axios from 'axios'
 
 export default () => {
