@@ -4,7 +4,6 @@ import SearchBar from '@/components/SearchBar'
 import EmailTable from '@/components/EmailTable'
 import { useState } from 'react'
 import { FormOutlined } from '@ant-design/icons'
-import ReactQuill from 'react-quill'
 
 const { TextArea } = Input
 const { Header, Footer, Sider, Content } = Layout
