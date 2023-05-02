@@ -1,3 +1,4 @@
+import ComposeEmail from '@/components/ComposeEmail'
 import EmailTable from '@/components/EmailTable'
 import CustomLayout from '@/components/Layout'
 import SearchBar from '@/components/SearchBar'
@@ -5,9 +6,11 @@ import SidebarNavigation from '@/components/SidebarNavigation'
 import { FormOutlined } from '@ant-design/icons'
 import { Drawer, FloatButton, Form, Input, Layout } from 'antd'
 import { NextPageContext } from 'next'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 const { TextArea } = Input
 const { Header, Content } = Layout
+import type { DraggableData, DraggableEvent } from 'react-draggable'
+import Draggable from 'react-draggable'
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -26,14 +29,21 @@ const contentStyle: React.CSSProperties = {
 
 function Home({ account }: { account: object }) {
     console.log(account)
-
-    // const cookieValue = req.cookies.get('account') // <--- GET COOKIE
-    // console.log(cookieValue)
-
-    // get cookie
     const [open, setOpen] = useState(false)
-    const showDrawer = () => setOpen(true)
-    const onClose = () => setOpen(false)
+
+    const handleOk = (e: React.MouseEvent<HTMLElement>) => {
+        console.log(e)
+        setOpen(false)
+    }
+
+    const handleCancel = (e: React.MouseEvent<HTMLElement>) => {
+        console.log(e)
+        setOpen(false)
+    }
+
+    const showCompose = () => {
+        setOpen(true)
+    }
 
     return (
         <CustomLayout>
@@ -51,10 +61,15 @@ function Home({ account }: { account: object }) {
                     description="Compose"
                     icon={<FormOutlined />}
                     type="primary"
-                    onClick={showDrawer}
+                    onClick={showCompose}
                     style={{ right: 60, bottom: 60, width: 70, height: 70 }}
                 />
-                <Drawer
+                <ComposeEmail
+                    open={open}
+                    onOk={handleOk}
+                    onCancel={handleCancel}
+                />
+                {/* <Drawer
                     // responsive width
                     width={640}
                     placement="right"
@@ -73,10 +88,10 @@ function Home({ account }: { account: object }) {
                         </Form.Item>
                         <Form.Item label="Content">
                             {/* <ReactQuill /> */}
-                            <TextArea rows={4} showCount />
+                {/* <TextArea rows={4} showCount />
                         </Form.Item>
                     </Form>
-                </Drawer>
+                </Drawer>  */}
             </Layout>
         </CustomLayout>
     )
