@@ -58,10 +58,11 @@ export default function Home() {
                     </Content>
                 </Layout>
                 <FloatButton
+                    description="Compose"
                     icon={<FormOutlined />}
                     type="primary"
                     onClick={showDrawer}
-                    style={{ right: 64, bottom: 64 }}
+                    style={{ right: 60, bottom: 60, width: 70, height: 70 }}
                 />
                 <Drawer
                     // responsive width
